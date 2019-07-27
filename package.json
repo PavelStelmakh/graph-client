@@ -1,0 +1,24 @@
+{
+  "name": "graph-client",
+  "version": "1.0.0",
+  "description": "FE side with graphql",
+  "main": "app.js",
+  "scripts": {
+    "dev": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PavelStelmakh/graph-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PavelStelmakh/graph-client/issues"
+  },
+  "homepage": "https://github.com/PavelStelmakh/graph-client#readme",
+  "dependencies": {
+    "dotenv": "8.0.0",
+    "graphql": "14.4.2"
+  }
+}
