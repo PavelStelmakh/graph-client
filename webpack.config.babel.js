@@ -10,6 +10,12 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[hash].js',
     },
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        port: 8000,
+        host: 'localhost',
+        hot: true,
+    },
     module: {
         rules: [
             {
