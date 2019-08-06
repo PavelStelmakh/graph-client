@@ -6,13 +6,13 @@ import { UserService } from './services/user.service';
 import './App.css';
 
 const mutation = gql`
-input User {
+type User {
   email: String!
   name: String!
   lastName: String!
   password: String!
 }
-mutation CreateUser($user: User) {
+mutation CreateUser($user: User!) {
   createUser(user: $user) {
     id
     name
@@ -23,13 +23,34 @@ mutation CreateUser($user: User) {
 `;
 
 export function App() {
+  let value;
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Mutation mutation={mutation}>
-          {() => (
-            <form></form>
+          {(sendData, { data }) => data
+          ? (
+            <Fragment>
+              <h2>{data.createUser.email}</h2>
+              <h3>{`${data.createUser.name}`}</h3>
+            </Fragment>
+          )
+          : (
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              sendData({ variables: {
+                user: {
+                  email: value.value,
+                  name: value.value,
+                  lastName: value.value,
+                  password: value.value,
+                }
+              } });
+            }}>
+              <input ref={node => {value = node}} />
+              <button>send</button>
+            </form>
           )}
         </Mutation>
         {/* <UserService.GetUser Component={({ data: { author, director } }) => (
