@@ -6,13 +6,7 @@ import { UserService } from './services/user.service';
 import './App.css';
 
 const mutation = gql`
-type User {
-  email: String!
-  name: String!
-  lastName: String!
-  password: String!
-}
-mutation CreateUser($user: User!) {
+mutation CreateUser($user: UserInput!) {
   createUser(user: $user) {
     id
     name
