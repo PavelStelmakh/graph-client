@@ -17,36 +17,22 @@ query GetUsers {
 `;
 
 const getUserQuery = gql`
-query GetUser($aId: ID!, $dId: ID!, $hasId: Boolean!) {
+query GetUser($aId: ID!) {
   author: user(id: $aId) {
       name
       email
-    ...authorFields
   }
-  director: user(id: $dId) {
-      name
-      email
-    ... on Director {
-      id @include(if: $hasId)
-      money
-      articles {
-        title
-      }
-    }
-  }
-}
-
-fragment authorFields on Author {
-  id @include(if: $hasId)
 }
 `;
 
 export const UserService = {
     GetUsers: ({ Component }) => (
         <Query query={getUsersQuery}>
-            {({ loading, error, data }) => {
+            {({ loading, error, data, client }) => {
                 if (loading) return <h1>loooooadiing....</h1>
                 if (error) return <h1>eeeeerror.....</h1>
+
+                client.writeData({ data });
 
                 return <Component data={data} />;
             }}
